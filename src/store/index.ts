@@ -1,9 +1,16 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import citiesReducer from './citiesReducer/citiesReducer';
 
-// eslint-disable-next-line import/prefer-default-export
-export const store = configureStore({
-  reducer: {
-    cities: citiesReducer,
-  },
+const rootReducer = combineReducers({
+  citiesReducer,
 });
+
+export const setupStore = () => {
+  return configureStore({
+    reducer: rootReducer,
+  });
+};
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore['dispatch'];

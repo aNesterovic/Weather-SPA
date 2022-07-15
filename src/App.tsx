@@ -1,18 +1,23 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@material-ui/core';
 import HomePage from './components/Home';
 import NotFound from './components/NotFound';
 
+const theme = createTheme({});
+
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route exact path="/" element={<HomePage />} />
-          <Route exact path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
