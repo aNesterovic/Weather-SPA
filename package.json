@@ -19,6 +19,7 @@
     "@types/react-router": "^5.1.18",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^0.27.2",
+    "dayjs": "^1.11.3",
     "eslint": "^8.19.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

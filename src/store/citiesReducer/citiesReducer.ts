@@ -1,33 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// interface weatherState {
-//   forSaveCity: [];
-//   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
-// }
-
-// const initialState = {
-//   forSaveCity: [],
-//   loading: 'idle',
-// } as UsersState;
-
-// const citiesReducer = createSlice({
-//   name: 'citiesReducer',
-//   initialState,
-//   reducers: {
-//     setItemsForSave: (state: any, action: PayloadAction<string>) => {
-//       // WeatherAPIRequest(state, action?.payload);
-//     },
-//   },
-//   extraReducers: (builder) => {
-//     builder.addCase(
-//       fetchCityWeather.fulfilled,
-//       (state, action: PayloadAction<any>) => {
-//         // state.forSaveCity.push(action.payload);
-//       }
-//     );
-//   },
-// });
-
 interface objRespons {
   name?: string;
 }
