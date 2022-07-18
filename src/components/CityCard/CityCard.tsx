@@ -25,16 +25,21 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   mainInfo: {
-    display: 'grid',
-    gap: '10px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: '20px',
+  },
+  cityImage: {
+    width: '100%',
+    borderRadius: '20%',
   },
 });
 
 interface CityCardProps {
   data: IWeatherData;
-  onClick: (e: any) => void;
+  onClick: (e: React.MouseEvent) => void;
   handleRequest: (name: any) => void;
-  setWeather: any;
+  setWeather: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 const CityCard: FC<CityCardProps> = ({
@@ -47,7 +52,7 @@ const CityCard: FC<CityCardProps> = ({
   const [weatherData, setWeatherData] = useState<
     IModifyWeatherData | undefined
   >();
-  const handleDelete = (e: any) => {
+  const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
     localStorage.removeItem(data.name);
     setWeather([]);
@@ -57,7 +62,7 @@ const CityCard: FC<CityCardProps> = ({
       }
       if (key) {
         const localItems = JSON.parse(localStorage.getItem(key) || '');
-        setWeather((old: any) => [...old, localItems]);
+        setWeather((old: any[]) => [...old, localItems]);
       }
     }
   };
@@ -78,7 +83,7 @@ const CityCard: FC<CityCardProps> = ({
                 <DeleteOutlined />
               </IconButton>
               <IconButton
-                onClick={(e: any) => {
+                onClick={(e: React.MouseEvent) => {
                   e.stopPropagation();
                   handleRequest(weatherData?.location);
                 }}
@@ -89,24 +94,27 @@ const CityCard: FC<CityCardProps> = ({
           }
         />
         <CardContent>
-          <div className={classes.iconData}>
-            <img
-              src={`http://openweathermap.org/img/w/${weatherData?.icon_id}.png`}
-              alt=""
-            />
-            <Typography variant="h3" color="textSecondary">
-              {weatherData?.temperature}&deg;
-            </Typography>
-          </div>
+          <img className={classes.cityImage} src={weatherData?.image} alt="" />
           <div className={classes.mainInfo}>
-            <Typography variant="body2" color="textSecondary">
-              {weatherData?.location}, {weatherData?.country}
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              {dayjs(weatherData?.date).format('dddd')},{' '}
-              {dayjs.utc(weatherData?.date).format('h:mm A')},{' '}
-              {weatherData?.description}
-            </Typography>
+            <div>
+              <Typography variant="body1" color="textSecondary">
+                {weatherData?.location}, {weatherData?.country}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                {dayjs(weatherData?.date).format('dddd')},{' '}
+                {dayjs.utc(weatherData?.date).format('h:mm A')},{' '}
+                {weatherData?.description}
+              </Typography>
+            </div>
+            <div className={classes.iconData}>
+              <img
+                src={`http://openweathermap.org/img/w/${weatherData?.icon_id}.png`}
+                alt=""
+              />
+              <Typography variant="h3" color="textSecondary">
+                {weatherData?.temperature}&deg;
+              </Typography>
+            </div>
           </div>
         </CardContent>
       </Card>

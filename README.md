@@ -20,5 +20,10 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ## External libraries
 
-As style providers I used Material UI library. 
+I used the Material UI library for styling.
 
+I also used the dayjs library (https://day.js.org/) to style the data.
+
+For the card blocks, I used react-masonry-css (https://www.npmjs.com/package/react-masonry-css).
+
+I used Redux toolset - @reduxjs/toolkit.

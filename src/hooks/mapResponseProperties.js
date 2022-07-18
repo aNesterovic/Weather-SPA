@@ -12,6 +12,7 @@ export default function mapResponseProperties(value) {
     feels_like: Math.round(value.main.feels_like),
     humidity: value.main.humidity,
     icon_id: value.weather[0].icon,
+    image: value.image,
     sunrise: value.sys.sunrise,
     sunset: value.sys.sunset,
     temperature: Math.round(value.main.temp),

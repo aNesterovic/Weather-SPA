@@ -14,6 +14,14 @@ const fetchCityWeather =
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_key}&units=metric`
       );
+      try {
+        const resp = await axios.get(
+          `https://api.teleport.org/api/urban_areas/slug:${cityName.toLowerCase()}/images`
+        );
+        response.data.image = resp.data.photos[0].image.web;
+      } catch (e: any) {
+        console.log(e.message);
+      }
       dispatch(forSaveCitySuccess(response.data));
     } catch (e: any) {
       dispatch(forSaveCityError(e.message));

@@ -64,6 +64,7 @@ export interface IModifyWeatherData {
   location: string;
   max: number;
   min: number;
+  image?: string;
   sunrise: string;
   sunset: string;
   temperature: number;

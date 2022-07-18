@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react';
-import axios from 'axios';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Masonry from 'react-masonry-css';
@@ -11,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import fetchCityWeather from '../store/citiesReducer/ActionFetchData';
 import { TextField } from '@material-ui/core';
 import { NavLink, useNavigate } from 'react-router-dom';
+import IWeatherData from './types/types';
 
 const useStyles = makeStyles({
   field: {
@@ -68,14 +68,7 @@ const Home: FC = () => {
       setTitleError(true);
     }
     if (name) {
-      console.log(name);
       dispatch(fetchCityWeather(name));
-      (async () => {
-        const response = await axios.get(
-          `https://api.teleport.org/api/urban_areas/slug:${name}/`
-        );
-        console.log(response);
-      })();
       setCityName('');
     }
   };
@@ -121,12 +114,12 @@ const Home: FC = () => {
         columnClassName="my-masonry-grid_column"
       >
         {weather.length &&
-          weather.map((el, index): any =>
+          weather.map((el: [IWeatherData], index: number) =>
             el.length ? (
               <div key={index}>
                 <CityCard
                   data={el[0]}
-                  onClick={(e: any) => {
+                  onClick={(e: React.MouseEvent) => {
                     e.stopPropagation();
                     history('/cityWeather/' + el[0].name);
                   }}
